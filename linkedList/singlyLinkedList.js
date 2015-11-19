@@ -9,14 +9,14 @@ function SLinkedList() {
   this._tail = null;
 }
 
-SLinkedList.createNode = function(value) {
+SLinkedList.prototype.createNode = function(value) {
   return {
     value,
     next: null
   };
 };
 
-SLinkedList.addToTail = function(value) {
+SLinkedList.prototype.addToTail = function(value) {
   var newNode = this.createNode(value);
 
   if (this._head === null) {
@@ -28,7 +28,7 @@ SLinkedList.addToTail = function(value) {
   this._tail = newNode;
 };
 
-SLinkedList.addToHead = function(value) {
+SLinkedList.prototype.addToHead = function(value) {
   var newNode = this.createNode(value);
 
   if (this._head === null) {
@@ -41,7 +41,7 @@ SLinkedList.addToHead = function(value) {
 };
 
 
-SLinkedList.removeFromTail = function() {
+SLinkedList.prototype.removeFromTail = function() {
   var removedVal;
   if (this._head === null) {
     return;
@@ -64,7 +64,7 @@ SLinkedList.removeFromTail = function() {
   return removedVal;
 };
 
-SLinkedList.removeFromHead = function() {
+SLinkedList.prototype.removeFromHead = function() {
   var removedVal;
   if (this._head === null) {
     return;
@@ -80,7 +80,7 @@ SLinkedList.removeFromHead = function() {
   return removedVal;
 };
 
-SLinkedList.contains = function(target) {
+SLinkedList.prototype.contains = function(target) {
   var currNode = this._head;
 
   while (currNode) {
@@ -94,20 +94,52 @@ SLinkedList.contains = function(target) {
   return false;
 };
 
-SLinkedList.detectCycle = function(first_argument) {
+SLinkedList.prototype.retrieveHead = function(first_argument) {
+  return (this._head) ? this._head.value : this._head;
+};
+
+SLinkedList.prototype.retrieveTail = function(first_argument) {
+  return (this._tail) ? this._tail.value : this._tail;
+};
+
+SLinkedList.prototype.size = function() {
+  var size = 0;
+  var currNode = this._head;
+
+  while (currNode) {
+    size++;
+    currNode = currNode.next;
+  }
+  return size;
+};
+
+SLinkedList.prototype.detectCycle = function(first_argument) {
 
 };
 
-SLinkedList.detectCycleStart = function(first_argument) {
+SLinkedList.prototype.detectCycleStart = function(first_argument) {
 
 };
 
-SLinkedList.kthNodeFromEnd = function(first_argument) {
+SLinkedList.prototype.kthNodeFromEnd = function(first_argument) {
 
 };
 
-SLinkedList.reverseLL = function(first_argument) {
+SLinkedList.prototype.reverseLL = function(first_argument) {
 
 };
 
 module.exports = SLinkedList;
+
+// EXAMPLE USAGE:
+var list = new SLinkedList();
+console.log(list._tail); // null
+list.addToTail(4);
+list.addToTail(5);
+console.log(list.size()); // 2
+console.log(list._head.value); // 4
+console.log(list.contains(5)); // true
+console.log(list.contains(6)); // false
+console.log(list.removeFromHead()); // 4
+console.log(list._tail.value); // 5
+console.log(list.size()); // 1
